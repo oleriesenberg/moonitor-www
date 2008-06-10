@@ -8,22 +8,22 @@ class Moonitor < Atchoum::Website
         link :rel => 'stylesheet', :href => "/base.css", :type => 'text/css'
       end
       body do
-        div.container do
-          div.header do
+        div.container! do
+          div.header! do
             img.logo :src => "/logo.jpg"
           end
 
-          div.navbar do
-            ul.menu do
+          div.navbar! do
+            ul.menu! do
               li { a 'moonitor', :href => "/" }
               li { a 'overlay', :href => "/overlay/" }
             end
           end
-          div.content do
+          div.content! do
             self << yield
           end
  
-          div.footer do
+          div.footer! do
             text "&copy; 2008 Ole Riesenberg | Logo &copy; 2008 N. Kittel"
           end
         end
