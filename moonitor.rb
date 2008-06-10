@@ -1,31 +1,29 @@
 require 'atchoum'
 
 class Moonitor < Atchoum::Website
-  ROOT = ENV['SITE_ROOT'] || ''
-
   def layout
     xhtml_html do
       head do
         title 'Moonitor :: gentoo linux emerge monitor and overlay'
-        link :rel => 'stylesheet', :href => "#{ROOT}/base.css", :type => 'text/css'
+        link :rel => 'stylesheet', :href => "/base.css", :type => 'text/css'
       end
       body do
-        div.container! do
-          div.header! do
-            img.logo! :src => "/logo.jpg"
+        div.container do
+          div.header do
+            img.logo :src => "/logo.jpg"
           end
 
-          div.navbar! do
-            ul.menu! do
-              li { a 'moonitor', :href => "#{ROOT}/" }
-              li { a 'overlay', :href => "#{ROOT}/overlay/" }
+          div.navbar do
+            ul.menu do
+              li { a 'moonitor', :href => "/" }
+              li { a 'overlay', :href => "/overlay/" }
             end
           end
-          div.content! do
+          div.content do
             self << yield
           end
  
-          div.footer! do
+          div.footer do
             text "&copy; 2008 Ole Riesenberg | Logo &copy; 2008 N. Kittel"
           end
         end
@@ -53,17 +51,18 @@ class Moonitor < Atchoum::Website
   end
 
   def overlay_page
-    p.what "What is Moonitor?"
-    text "Moonitor is a dbus monitoring suite for emerge with KDE panel support, a Qt Widget and an ncurses CLI."
+    p.what "What can be found in the overlay?"
+      text "The overlay currently contains ebuilds of moonitor and some ruby stuff."
 
 
-    p.what "Get it"
-      text "You can clone the code directly from our git repository" 
-      code "git clone git://moonitor.org/moonitor.git"
+    p.what "How to fetch it?"
+      text "You can fetch the overlay via layman"
+      code "layman -f -o http://moonitor.org/moonitor.xml -a moonitor"
       
       br
-      text "or install it from our overlay"
-      code "layman -f -o http://moonitor.org/moonitor.xml -a moonitor"
-      code "sudo emerge app-portage/moonitor" 
+      text "or do it manually"
+      code "cd /usr/portage/local"
+      code "git clone git://moonitor.org/overlay.git" 
+      code 'echo "PORTDIR_OVERLAY=\"/usr/portage/local/layman/moonitor\"" >> /etc/make.conf'
   end
 end
