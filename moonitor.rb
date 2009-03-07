@@ -39,11 +39,15 @@ class Moonitor < Atchoum::Website
     p.what "Get it"
       text "You can clone the code directly from our git repository" 
       code "git clone git://moonitor.org/moonitor.git"
+      code "cd moonitor"
+      code "cmake ."
+      code "make && make install"
       
       br
-      text "or install it from our overlay"
+      text "or fetch it via layman"
       code "layman -f -o http://moonitor.org/moonitor.xml -a moonitor"
-      code "sudo emerge app-portage/moonitor" 
+      code "emerge app-portage/moonitor"
+
 
     p.what "How to contribute?"
       text "Our Bugtracker is available at " 
