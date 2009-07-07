@@ -56,7 +56,7 @@ class Moonitor < Atchoum::Website
 
   def overlay_page
     p.what "What can be found in the overlay?"
-      text "The overlay currently contains ebuilds of moonitor and some ruby stuff."
+      text "The overlay currently contains the moonitor ebuilds and dependencies, some ruby and python stuff, nginx with a bunch of nice modules, games and more."
 
 
     p.what "How to fetch it?"
