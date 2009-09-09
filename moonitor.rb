@@ -46,7 +46,7 @@ class Moonitor < Atchoum::Website
       br
       text "or fetch it via layman"
       code "layman -f -o http://moonitor.org/moonitor.xml -a moonitor"
-      code "emerge app-portage/moonitor"
+      code "emerge sys-apps/moonitor"
 
 
     p.what "How to contribute?"
