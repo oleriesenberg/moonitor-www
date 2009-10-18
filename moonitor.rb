@@ -26,7 +26,9 @@ get '/' do
 end
 
 get '/overlay/' do
-  @repo = Repo.new("/home/hoodow/scm/overlay/.git")
+  @repo = RACK_ENV == 'development' ? 
+            Repo.new("/home/hoodow/scm/overlay/.git") :
+              Repo.new("/home/git/repositories/overlay.git")
   
   @packages = []
   @repo.tree.contents.each do |category|
