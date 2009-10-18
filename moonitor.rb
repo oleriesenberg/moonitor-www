@@ -36,8 +36,7 @@ get '/overlay/' do
       category.contents.each do |package|
         versions = []
         package.contents.each do |atom|
-          version = atom.name.scan(/-(?:\d.+)/)
-          versions << version.first.sub('-', '').sub('.ebuild', '') unless version.empty?
+          versions << atom.name.sub("#{package.name}-", '').sub('.ebuild', '') if atom.name =~ /.ebuild$/
         end
         blob = @repo.tree / "#{category.name}/#{package.name}/#{package.name}-#{versions.last}.ebuild"
         grep = blob.data.scan(/^DESCRIPTION="(.*)"$/) if blob
