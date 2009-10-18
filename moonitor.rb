@@ -26,10 +26,10 @@ get '/' do
 end
 
 get '/overlay/' do
-  @repo = RACK_ENV == 'development' ? 
+  @repo = development? ? 
             Repo.new("/home/hoodow/scm/overlay/.git") :
               Repo.new("/home/git/repositories/overlay.git")
-  
+
   @packages = []
   @repo.tree.contents.each do |category|
     unless category.name =~ /(profiles|eclass|metadata)/
