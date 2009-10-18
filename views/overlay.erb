@@ -1,0 +1,17 @@
+<p class="what">What can be found in the overlay?</p>
+The overlay currently contains the moonitor ebuilds and dependencies, some ruby and python stuff, nginx with a bunch of nice modules, games and more.
+<br /><br />
+<% @packages.each do |package| %>
+  <div style="width:770px; padding:4px; border:1px solid #a4a4a4; background:#c4c4c4;">
+    <span style="font-weight:bold;"><%= package.atom %></span><br />
+    <span style="color:#009400; font-size: 12px;">Versions: <%= package.versions_string if package.versions %></span>
+  </div>
+<% end %>
+
+<p class="what">How to fetch it?</p>
+You can fetch the overlay via layman
+<code>layman -f -o http://moonitor.org/moonitor.xml -a moonitor</code>
+<br/>or do it manually
+<code>cd /usr/portage/local</code>
+<code>git clone git://moonitor.org/overlay.git</code>
+<code>echo "PORTDIR_OVERLAY=\"/usr/portage/local/layman/moonitor\"" &gt;&gt; /etc/make.conf</code>
