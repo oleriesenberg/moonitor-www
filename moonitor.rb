@@ -39,7 +39,10 @@ get '/overlay/' do
           version = atom.name.scan(/-(?:\d.+)/)
           versions << version.first.sub('-', '').sub('.ebuild', '') unless version.empty?
         end
-        @packages << Package.new("#{category.name}/#{package.name}", versions)
+        blob = @repo.tree / "#{category.name}/#{package.name}/#{package.name}-#{versions.last}.ebuild"
+        grep = blob.data.scan(/^DESCRIPTION="(.*)"$/) if blob
+        description = (blob.nil? or grep.empty?) ? nil : grep[0][0]
+        @packages << Package.new("#{category.name}/#{package.name}", versions, description)
       end
     end
   end

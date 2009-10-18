@@ -4,7 +4,8 @@ The overlay currently contains the moonitor ebuilds and dependencies, some ruby 
 <% @packages.each do |package| %>
   <div style="width:770px; padding:4px; border:1px solid #a4a4a4; background:#c4c4c4;">
     <span style="font-weight:bold;"><%= package.atom %></span><br />
-    <span style="color:#009400; font-size: 12px;">Versions: <%= package.versions_string if package.versions %></span>
+    <span style="color:#009400; font-size:12px;">Versions: <%= package.versions_string if package.versions %></span><br />
+    <span style="color:#555; font-size:12px;"><%= package.description if package.description %></span>
   </div>
 <% end %>
 
