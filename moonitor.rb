@@ -36,7 +36,7 @@ class Package
   end
 
   def iuse_string
-    self.iuse.sort.join(' | ')
+    self.iuse.sort.join(' ')
   end
 end
 
