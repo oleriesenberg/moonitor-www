@@ -13,6 +13,7 @@ class Package
   attr :atom, true
   attr :versions, true
   attr :description, true
+  attr :iuse, true
 
   def initialize(category, package)
     versions = []
@@ -21,15 +22,21 @@ class Package
     end
 
     blob = REPO.tree / "#{category.name}/#{package.name}/#{package.name}-#{versions.last}.ebuild"
-    grep = blob.data.scan(/^DESCRIPTION="(.*)"$/) if blob
+    description = blob.data.scan(/^DESCRIPTION="(.*)"$/) if blob
+    iuse = blob.data.scan(/^IUSE="(.*)"$/) if blob
 
     self.atom = "#{category.name}/#{package.name}"
     self.versions = versions if versions
-    self.description = (blob.nil? or grep.empty?) ? nil : grep[0][0]
+    self.description = (blob.nil? or description.empty?) ? nil : description[0][0]
+    self.iuse = (blob.nil? or iuse.empty?) ? nil : iuse[0][0].split
   end
 
   def versions_string
     self.versions.join(' | ')
+  end
+
+  def iuse_string
+    self.iuse.sort.join(' | ')
   end
 end
 
